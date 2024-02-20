@@ -2,5 +2,5 @@
 session_start();
 session_unset();
 session_destroy();
-header("localhost:log.php");
+header("location:log.php");
 ?>

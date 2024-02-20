@@ -1,6 +1,7 @@
 <?php
+session_start();
 require_once('database.php');
-$data=tampildata();
+$data=tampildata_user($_SESSION['id_user']);
 $nomor=0;
 ?>
 
@@ -16,12 +17,11 @@ $nomor=0;
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <title>notes</title>
+    <title>notes2</title>
 </head>
 
 <body> 
      <?php
-    session_start();
     if($_SESSION['status']!="login"){
         header("location:log.php?msg=belum_login");
     }
@@ -37,7 +37,6 @@ $nomor=0;
       <th scope="col">No</th>
       <th scope="col">Created at</th>
       <th scope="col">Note</th>
-      <th scope="col">Username</th>
       <th scope="col">Action</th>
     </tr>
   </thead>
@@ -48,7 +47,6 @@ $nomor=0;
       <th scope="row"><?php echo "$nomor"; ?></th>
       <td><?php echo $item['created_at']; ?></td>
       <td><?php echo $item['note']; ?></td>
-      <td><?php echo $item['username']; ?></td>
       <td><?php echo "<a href='edit.php?id=$item[id]'>Edit</a> | <a href='javascript:hapusdata(".$item['id'].")'>Hapus Data</a>";?> </td>
       
     </tr>

@@ -3,7 +3,7 @@
  $id=$_POST['id'];
  $xnote = $_POST['notes'];
 
- $sql2=updatedata("notes",$xnote,$id);
+ $sql2=updatedata("note",$xnote,$id);
  if ($sql2) {
     header("location:notes.php");
  }

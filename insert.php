@@ -1,9 +1,3 @@
-<?php
-require_once('database.php');
-$data=editdata('note', $_GET['id']);
-?>
-
-
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,56 +7,54 @@ $data=editdata('note', $_GET['id']);
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+ 
     <title>Hello, world!</title>
   </head>
   <body>
+  <?php
+    session_start();
+    if($_SESSION['status']!="login"){
+        header("location:log.php?msg=belum_login");
+    }
+    ?>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">Notes</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-   
-    
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+              <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Notes</a>
+              <a class="nav-link" href="notes.php">Notes</a>
             </li>
+           
             <li class="nav-item">
-                <a class="nav-link" href="#">API</a>
-            </li>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Logout</button>
-        </form>
-    </div>
-</nav>
-<div class="container">
-  <h1>EDIT NOTES</h1> 
-  <?php while($note=mysqli_fetch_array($data)): ?> 
-  <form action="update.php" method="post">
+                <a class="nav-link" href="user.php">user</a>
+              </li>
+          </ul>
+           
+          <a href="logout.php"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">logout</button></a>
+        </div>
+      </nav>
+
+
+ <div class="container">
+  <h1>INSERT NOTES</h1> 
+  <form action="proses_input.php" method="post">
   <div class="form-group">
-    <input type="hidden" name="id" value="<?php echo "$note[id]"; ?>">
+    <input type="hidden" name="id" value="">
     <label for="notes">notes</label>
-    <textarea class="form-control" id="textarea" rows="3" name="notes"><?php
-    echo"$note[note]"; ?></textarea>
+    <textarea class="form-control" id="textarea" rows="3" name="notes"></textarea>
   </div>
   <div>
-    <input type="submit" value="update">
+    <input type="submit" value="insert">
   </div>
   </form>
-  <?php endwhile; ?>
   </div>
-
-
-
-
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

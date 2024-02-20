@@ -1,4 +1,7 @@
-
+<?php
+require_once("database.php");
+session_start();
+?>
 
 <!doctype html>
 <html lang="en">
@@ -14,7 +17,6 @@
   </head>
   <body>
   <?php
-    session_start();
     if($_SESSION['status']!="login"){
         header("location:log.php?msg=belum_login");
     }
@@ -24,9 +26,7 @@
 
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <center><h1 class="display-4 ">My Notes 2024</h1></center>
-         <center><p class="lead">Something short and leading about the collection beloww-- its contents, the creator,etc.
-            Make it short and sweet ,but now too short so folks dont simply skip over it entirely.</p></center> 
+          <center><h1 class="display-4 ">Hallo Member</h1></center>
             <center><a href="insert.php"><button type="button" class="btn btn-secondary">notes</button></a></center>
         </div>
       </div>

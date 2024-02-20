@@ -3,13 +3,22 @@ require_once('database.php');
 session_start();
 
 if(isset($_POST['masuk'])){
+  $username=$_POST['username'];
     if(cek_login($_POST['username'],$_POST['password'])){
         $_SESSION['username'] =$username;
         $_SESSION['status'] ="login";
-        header("location:home.php");
+        if(cek_login($_POST['username'], $_POST['password'])){
+          $_SESSION['username'] =$username;
+          $_SESSION['status'] ="login";
+          if($_SESSION['role']=="admin"){
+            header("location:home.php");
+          }else{
+            header("location:member.php");
+          }
     }else{
         header("location:log.php?msg=gagal");
     }
+}
 }
 ?>
 
